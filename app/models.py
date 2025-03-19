@@ -29,7 +29,7 @@ class ToDo(Base):
     important: Mapped[bool] = mapped_column(Boolean, default=False)
     done: Mapped[bool] = mapped_column(Boolean, default=False)
     start_time: Mapped[datetime.datetime] = mapped_column(DateTime, server_default=func.now())
-    end_time: Mapped[datetime.datetime] = mapped_column(DateTime)
+    end_time: Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
 
     @property
     def dict(self):
@@ -39,7 +39,8 @@ class ToDo(Base):
             'description': self.description,
             'important': self.important,
             'done': self.done,
-            'start_time': self.start_time.isoformat()
+            'start_time': self.start_time.isoformat(),
+            'end_time': self.end_time.isoformat() if self.end_time else None
         }
 
 
