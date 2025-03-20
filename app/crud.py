@@ -23,6 +23,6 @@ async def get_item(session: AsyncSession, orm_cls: ORM_CLS, item_id: int) -> ORM
 
 
 async def delete_item(session: AsyncSession, orm_cls: ORM_CLS, item_id: int) -> None:
-    orm_obj = get_item(session, orm_cls, item_id)
+    orm_obj = await get_item(session, orm_cls, item_id)
     await session.delete(orm_obj)
     await session.commit()

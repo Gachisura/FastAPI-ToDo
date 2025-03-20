@@ -43,6 +43,5 @@ async def update_todo(todo_id: int, todo_json: schema.UpdateTodoRequest, session
 
 @app.delete("/v1/todo/{todo_id}", response_model=schema.DeleteTodoResponse, )
 async def delite_todo(todo_id: int, session: SessionDependency):
-    todo = await crud.get_item(session, models.ToDo, todo_id)
-    await crud.delete_item(todo)
+    await crud.delete_item(session, models.ToDo, todo_id)
     return STATUS_SUCCESS_RESPONSE
